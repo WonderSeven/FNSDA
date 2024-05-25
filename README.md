@@ -5,7 +5,7 @@
 ---
 
 <p align="center">
-    <img width=380 src="./figs/framework.png">
+    <img width=320 src="./figs/framework.png">
     <!-- <br>Fig 1. The overview of network architecture for LSSAE.</br> -->
 </p>
 
