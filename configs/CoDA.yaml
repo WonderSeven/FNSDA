@@ -1,0 +1,89 @@
+gpu_ids: '0'
+
+algorithm:
+  name: 'CoDA'
+  hidden_dim: 64
+  nl: 'group_swish'
+  params: {
+    code_dim: 2,
+    layers: [-1],
+    options: {}
+  }
+
+trainer:
+  data_name: 'lotka'
+  task: 'inter' # 'inter' or 'extra'
+  mode: 'train'
+  n_env: 1
+  train_epochs: 100000
+  test_epoch: -1
+  adaptation: True
+  adapt_epochs: 20000
+  val_freq: 30
+  print_freq: 50
+  seed: 0
+  record: True
+  output_dir: './logs/baseline/lotka/CoDA_l1'
+
+
+solver:
+  base_lr: 1e-3   # 0.1
+  optimizer: "Adam"
+  momentum: 0.9
+  weight_decay: 5e-4
+  method: 'euler'
+  criterion: 'mse'
+  params: {
+    loss_norm: 'l12m-l1c', # l12m-l1c or l2m-l2c
+    l_m: 1e-6
+  }
+
+scheduler:
+  name: 'step'
+  params: {
+    step_size: 100,
+    gamma: 0.1
+  }
+
+lotka:
+  train_batch_size: 100
+  eval_batch_size: 50
+  factor: 1.0
+  state_dim: 2
+  init_gain: 0.15
+  method: 'RK45'
+  t_horizon: 20
+  dt: 0.5
+
+g_osci:
+  train_batch_size: 100
+  eval_batch_size: 50
+  factor: 1.0
+  state_dim: 7
+  init_gain: 0.1
+  method: 'RK45'
+  t_horizon: 2
+  dt: 0.05
+  k1_range_idx: 0
+
+gray:
+  train_batch_size: 50
+  eval_batch_size: 2
+  factor: 5e-4
+  state_dim: 2
+  size: 32
+  init_gain: 1.
+  method: 'RK45'
+  t_horizon: 400
+  dt: 40
+
+navier:
+  train_batch_size: 50
+  eval_batch_size: 2
+  factor: 1
+  state_dim: 1
+  size: 32
+  init_gain: 0.1
+  method: 'euler'
+  t_horizon: 10
+  dt: 1
