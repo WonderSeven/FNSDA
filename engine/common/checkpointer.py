@@ -128,35 +128,20 @@ class Checkpointer(object):
                                          (k in model_dict and not ("net_leaf" in k))}
 
         elif self.algorithm.__class__.__name__ == 'FourierSolver':
-            # TODO: Mean code and random activation (default)
-            # pretrained_env_codes = pretrained_algorithm_dict.get('vector_field.codes')
-            # cur_env_codes = model_dict.get('vector_field.codes')
-            # init_env_codes = torch.mean(pretrained_env_codes, dim=0, keepdim=True)
-            # init_env_codes = init_env_codes.expand_as(cur_env_codes)
-            # pretrained_algorithm_dict.update({'vector_field.codes': init_env_codes})
-            # # filter out the params in activation function
-            # pretrained_algorithm_dict = {k: v for k, v in pretrained_algorithm_dict.items() if
-            #                              (k in model_dict and not ("activation" in k))}
-
-            # TODO: Random code and activation
-            pretrained_algorithm_dict = {k: v for k, v in pretrained_algorithm_dict.items() if
-                                         (k in model_dict and not ("activation" in k or "codes" in k))}
-
-            # TODO: Mean code and mean activation
-            # filtered_algorithm_dict = {}
-            # for k, v in pretrained_algorithm_dict.items():
-            #     if k in model_dict:
-            #         if "activation" in k or "codes" in k :
-            #             init_v = torch.mean(v, dim=0, keepdim=True)
-            #             cur_v = model_dict.get(k)
-            #             init_v = init_v.expand_as(cur_v)
-            #             filtered_algorithm_dict.update({k: init_v})
-            #         else:
-            #             filtered_algorithm_dict.update({k:v})
-            # pretrained_algorithm_dict = filtered_algorithm_dict
+            # Mean code and mean activation
+            filtered_algorithm_dict = {}
+            for k, v in pretrained_algorithm_dict.items():
+                if k in model_dict:
+                    if "activation" in k or "codes" in k :
+                        init_v = torch.mean(v, dim=0, keepdim=True)
+                        cur_v = model_dict.get(k)
+                        init_v = init_v.expand_as(cur_v)
+                        filtered_algorithm_dict.update({k: init_v})
+                    else:
+                        filtered_algorithm_dict.update({k:v})
+            pretrained_algorithm_dict = filtered_algorithm_dict
         else:
             pretrained_algorithm_dict = {k: v for k, v in pretrained_algorithm_dict.items() if k in model_dict}
-        # """
 
         model_dict.update(pretrained_algorithm_dict)
         self.algorithm.load_state_dict(model_dict)
