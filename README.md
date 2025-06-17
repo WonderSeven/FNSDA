@@ -64,9 +64,9 @@ To apply our method to other datasets, you need to specify the dataset info and 
 ### Citations
 If you find this repo useful for your research, please cite the following papers:
 
-    @misc{Qin2024FNSDA,
+    @article{Qin2025FNSDA,
     title={Generalizing to New Dynamical Systems via Frequency Domain Adaptation},
     author={Tiexin Qin and Hong Yan and Haoliang Li},
-    year={2024},
-    url={https://openreview.net/forum?id=SXj1qjFEpQ}
+    journal={IEEE Transactions on Pattern Analysis and Machine Intelligence},
+    year={2025},
     }
