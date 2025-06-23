@@ -9,7 +9,7 @@
     <!-- <br>Fig 1. The overview of network architecture for LSSAE.</br> -->
 </p>
 
-This repository provides the official implementations and experiments for our research in generalizable neural surrogate for numerical solvers, introduced in [FNSDA](https://openreview.net/pdf?id=SXj1qjFEpQ). The core code for implement our method can be found in [models/fourier_solver.py](models/fourier_solver.py). Please follow the steps to prepare running environment, and run our code.
+This repository provides the official implementations and experiments for our research in generalizable neural surrogate for numerical solvers, introduced in [FNSDA](https://ieeexplore.ieee.org/document/11045837). The core code for implement our method can be found in [models/fourier_solver.py](models/fourier_solver.py). Please follow the steps to prepare running environment, and run our code.
 
 
 ### Requirements
